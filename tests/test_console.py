@@ -16,6 +16,7 @@ from tests import clear_stream
 from io import StringIO
 from unittest.mock import patch
 
+
 class TestHBNBCommand (unittest.TestCase):
     """Unittests for testing prompting of the HBNB command interpreter."""
 
@@ -42,7 +43,7 @@ class TestHBNBCommand (unittest.TestCase):
             self.assertIn("'name': 'James'", cout.getvalue().strip())
             self.assertIn("'age': 17", cout.getvalue().strip())
             self.assertIn("'height': 5.9", cout.getvalue().strip())
-    
+
     @unittest.skipIf(
         os.getenv('HBNB_TYPE_STORAGE') != 'db', 'DBStorage test')
     def test_db_create(self):
@@ -64,13 +65,13 @@ class TestHBNBCommand (unittest.TestCase):
                 passwd=os.getenv('HBNB_MYSQL_PWD'),
                 db=os.getenv('HBNB_MYSQL_DB')
             )
-            cursor = dbconn.cursor()
-            cursor.execute('SELECT * FROM users WHERE id="{}"'.format(model_id))
-            result = cursor.fetchone()
+            cur = dbconn.cursor()
+            cur.execute('SELECT * FROM users WHERE id="{}"'.format(model_id))
+            result = cur.fetchone()
             self.assertTrue(result is not None)
             self.assertIn('john25@gmail.com', result)
             self.assertIn('123', result)
-            cursor.close()
+            cur.close()
             dbconn.close()
 
     @unittest.skipIf(
