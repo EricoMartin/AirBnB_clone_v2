@@ -3,18 +3,19 @@
 A test module for the console of the AirBnB Project
 """
 
-import os
 import json
-import unittest
 import MySQLdb
+import os
 import sqlalchemy
+import unittest
+from io import StringIO
+from unittest.mock import patch
+
 from console import HBNBCommand
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from tests import clear_stream
-from io import StringIO
-from unittest.mock import patch
 
 
 class TestHBNBCommand (unittest.TestCase):
