@@ -27,6 +27,10 @@ class FileStorage:
                     newdict[key] = value
             return newdict
 
+    def close(self):
+        """deserialize the JSON file to objects"""
+        self.reload()
+
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
