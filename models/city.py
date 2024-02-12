@@ -17,3 +17,20 @@ class City(BaseModel, Base):
     else:
         state_id = ""
         name = ""
+
+    if getenv("HBNB_TYPE_STORAGE") != 'db':
+        @property
+        def places(self):
+            """
+            getter for places
+            :return: list of places in that city
+            """
+            all_places = models.storage.all("Place")
+
+            result = []
+
+            for obj in all_places.values():
+                if str(obj.city_id) == str(self.id):
+                    result.append(obj)
+
+            return result
